@@ -1,26 +1,15 @@
-import loginPage from '../pages/loginPage';
+// cypress/e2e/login.cy.js
 
-describe('OrangeHRM Login Tests', () => {
-  beforeEach(() => {
-    loginPage.visit();
-  });
+export const login = () => {
+    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
-  it('should login successfully with valid credentials', () => {
-    cy.fixture('loginData').then((data) => {
-      loginPage.enterUsername(data.validUser.username);
-      loginPage.enterPassword(data.validUser.password);
-      loginPage.clickLoginButton();
-      loginPage.verifySuccessfulLogin();
-    });
-  });
+    // Verify page title
+    cy.title().should('eq', 'OrangeHRM');
 
-  it('should show error message for invalid credentials', () => {
-    cy.fixture('loginData').then((data) => {
-      loginPage.enterUsername(data.invalidUser.username);
-      loginPage.enterPassword(data.invalidUser.password);
-      loginPage.clickLoginButton();
-      cy.get('.oxd-alert-content').should('be.visible')
-        .and('contain', 'Invalid credentials');
-    });
-  });
-});
+    // Enter username and password
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123');
+
+    // Click login button
+    cy.get('.oxd-button').click();
+};

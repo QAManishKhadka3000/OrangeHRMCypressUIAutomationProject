@@ -1,2 +1,2 @@
-# OrangeHRMCypressAutomationProject
-This is the UI automation done for the demo OrnageHRM using Cypress
+# OrangeHRMCypressUIAutomationProject
+This is for the user Interface Automation Testing Project
